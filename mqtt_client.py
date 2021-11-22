@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 from random import randrange, uniform
 import time
 import devices_mapping
+import do_controller
 
 
 def on_message(client, userdata, message):
@@ -18,7 +19,8 @@ def on_message(client, userdata, message):
 
 
 def connect_to_broker():
-    broker_address="127.0.0.1"
+    #broker_address="127.0.0.1"
+    broker_address="192.168.0.113"
     print("creating new instance")
     client = mqtt.Client("RS485_client")    # create new instance
     client.on_message=on_message            # attach function to callback
