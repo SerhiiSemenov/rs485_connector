@@ -33,7 +33,10 @@ class DOController:
             sock.sendall(adu)
         except ConnectionResetError:
             print("RESET by server")
+            self.sock.close()
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect(('192.168.0.101', 20108))
+            print("New socket have been created")
 
         # Check exception ADU (which is shorter than all other responses) first.
         exception_adu_size = 5
