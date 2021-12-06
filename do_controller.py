@@ -22,59 +22,71 @@ class DOController:
         print("Close socket")
         self.sock.close()
 
-    def send_msg(self, adu, sock):
+    def send_msg(self, adu):
         """ Send RTU ADU over socket to to server and return parsed response.
-
         :param adu: Request ADU.
         :param sock: Socket instance.
         :return: Parsed response from server.
         """
         try:
-            sock.sendall(adu)
+            self.sock.sendall(adu)
+
+            # Check exception ADU (which is shorter than all other responses) first.
+            exception_adu_size = 5
+            response_error_adu = recv_exactly(self.sock.recv, exception_adu_size)
+
+            rtu.raise_for_exception_adu(response_error_adu)
+
+            expected_response_size = \
+                rtu.expected_response_pdu_size_from_request_pdu(adu[1:-2]) + 3
+            response_remainder = recv_exactly(
+                self.sock.recv, expected_response_size - exception_adu_size)
         except ConnectionResetError:
-            print("RESET by server")
+            print("RESET by server, reconnecting")
             self.sock.close()
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect(('192.168.0.101', 20108))
             print("New socket have been created")
+        except Exception as error:
+            print("Exception:{}".format(error))
+            return "Error: {}".format(error)
 
-        # Check exception ADU (which is shorter than all other responses) first.
-        exception_adu_size = 5
-        response_error_adu = recv_exactly(sock.recv, exception_adu_size)
-        rtu.raise_for_exception_adu(response_error_adu)
-
-        expected_response_size = \
-            rtu.expected_response_pdu_size_from_request_pdu(adu[1:-2]) + 3
-        response_remainder = recv_exactly(
-            sock.recv, expected_response_size - exception_adu_size)
-
-        return rtu.parse_response_adu(response_error_adu + response_remainder, adu)
+        try:
+            ret_val = rtu.parse_response_adu(response_error_adu + response_remainder, adu)
+        except Exception as error:
+            print("Exception:{}".format(error))
+            return "Error: {}".format(error)
+        return ret_val
 
     def channel_on(self, channel):
-        print("Turn On channel {}".format(channel))
+        # print("Turn On channel {}".format(channel))
         message = rtu.write_single_register(slave_id=self.slave_id, address=channel, value=0x0100)
         print(message)
-        response = self.send_msg(message, self.sock)
+        response = self.send_msg(message)
         if response == 256:
             print("Success open rq")
         else:
             print("response {}".format(response))
+            print("Try to send command again")
+            response = self.send_msg(message)
 
     def channel_off(self, channel):
-        print("Turn Off channel {}".format(channel))
+        # print("Turn Off channel {}".format(channel))
         message = rtu.write_single_register(slave_id=self.slave_id, address=channel, value=0x0200)
         print(message)
-        response = self.send_msg(message, self.sock)
+        response = self.send_msg(message)
         if response == 512:
             print("Success close rq")
         else:
             print("response {}".format(response))
+            print("Try to send command again")
+            response = self.send_msg(message)
 
     def get_channel_status(self, channel):
         print("Channel status {}".format(channel))
         message = rtu.read_holding_registers(slave_id=self.slave_id, starting_address=channel, quantity=0x0001)
         print(message)
-        response = self.send_msg(message, self.sock)
+        response = self.send_msg(message)
         print("response {}".format(response))
         return response
 
@@ -82,14 +94,14 @@ class DOController:
         """slave_id=0xFF - broadcast messages"""
         message = rtu.read_holding_registers(slave_id=0xFF, starting_address=0xFF, quantity=0x0001)
         print(message)
-        response = self.send_msg(message, self.sock)
+        response = self.send_msg(message)
         print("response {}".format(response))
         return response
 
     def set_slave_id(self, new_id):
         message = rtu.write_single_register(slave_id=self.slave_id, address=0xFF, value=new_id)
         print(message)
-        response = self.send_msg(message, self.sock)
+        response = self.send_msg(message)
         print("response {}".format(response))
         return response
 
@@ -109,14 +121,14 @@ def main():
     # controller_1.set_slave_id(new_id=0x0006)
     # controller_1.get_slave_id()
     #
-    # for i in range(0xF):
+    # for i in range(17):
     #     print("Out put id: {0}".format(i))
     #     controller_3.channel_on(i)
     #     command = input("Press something for the continue")
     #     if command == 'n':
     #         controller_3.channel_off(i)
     #     elif command == 'e':
-    #         break
+    #         return 0
 
     # main program
     while True:
@@ -135,6 +147,15 @@ def main():
                 print('tune off')
                 controller_4.channel_off(2)
                 time.sleep(1800)
+
+        if command == "test":
+            while(True):
+                print('lron')
+                controller_4.channel_on(13)
+                time.sleep(1)
+                print('lroff')
+                controller_4.channel_off(13)
+                time.sleep(3)
 
         if command == 'kbon':
             controller_4.channel_on(6)

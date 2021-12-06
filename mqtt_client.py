@@ -7,6 +7,7 @@ from do_controller import DOController as do_ctrl
 do_controllers_array = dict()
 is_inprogress = True
 
+
 def on_message(client, userdata, message):
     print("message received ", str(message.payload.decode("utf-8")))
     print("message topic=", message.topic)
@@ -50,10 +51,15 @@ def main():
     do_controllers_array[0x4] = do_ctrl(slave_id=0x4)
     time.sleep(1)
     connect_to_broker()
+    ping_controller_timeout = 0
 
     while is_inprogress:
         time.sleep(1)
-        #do_controllers_array[0x3].get_channel_status(0x1)
+        # ping_controller_timeout = ping_controller_timeout+1
+        # if ping_controller_timeout > 10000:
+        #     ping_controller_timeout = 0
+        #     print("Ping ethToRS server ")
+        #     do_controllers_array[0x3].get_channel_status(0x1)
 
 
 if __name__ == "__main__":

@@ -8,7 +8,8 @@ map_table = {
     "home/bedroom/recuperator_low_speed": ["bed room recuperator low speed", 0x4, 0x2],
     "home/bedroom/recuperator_hi_speed": ["bed room recuperator hi speed", 0x4, 0x8],
     "home/bedroom/main_lamp": ["bed room main lamp", 0x4, 0x4],
-    "home/bedroom/bed_lamp": ["bed room bed light", 0x3, 0x7],
+    "home/bedroom/bed_lamp": ["bed room bed light", 0x3, 0x9],
+    "home/bedroom/floor_lamp": ["bed room bed light", 0x3, 0x10],
 
     # kitchen
     "home/kitchen/background_lamp": ["kitchen furniture background lamp", 0x4, 0x6],
@@ -17,6 +18,7 @@ map_table = {
 
     # corridor
     "home/corridor/lamp": ["corridor lamp", 0x4, 0x7],
+    "home/corridor/server_fan": ["corridor fan", 0x4, 0x10],
 
     # living room
     "home/livingroom/recuperator_hi_speed": ["living room recuperator hi speed", 0x4, 0x1],
@@ -26,5 +28,10 @@ map_table = {
 
     # bathroom
     "home/bathroom_1": ["kitchen main lamp", 0x3, 0x3],
-    "home/bathroom_2": ["kitchen main lamp", 0x3, 0x3]
+    "home/bathroom_2": ["kitchen main lamp", 0x3, 0x3],
+
+    # heater valve
+    "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0x12],
+    "home/livingroom/heater_valve": ["living room heater valve", 0x3, 0x13],
+    "home/bedroom/heater_valve": ["bed room heater valve", 0x3, 0x14],
 }
