@@ -3,29 +3,41 @@ from random import randrange, uniform
 import time
 import devices_mapping
 from do_controller import DOController as do_ctrl
+import queue
+import threading
+
+command_queue = queue.Queue()
 
 do_controllers_array = dict()
 is_inprogress = True
 
 
+def worker():
+    while True:
+        item = command_queue.get()
+        topic = item[0]
+        payload = item[1]
+        print(f'Working on {topic}')
+
+        if topic in devices_mapping.map_table:
+            if payload == "ON":
+                print("Exec: {}; ID {}; Port {}".format(devices_mapping.map_table[topic][0],
+                                                        devices_mapping.map_table[topic][1],
+                                                        devices_mapping.map_table[topic][2]))
+                do_controllers_array[devices_mapping.map_table[topic][1]].channel_on(devices_mapping.map_table[topic][2])
+
+            else:
+                print("Exec: {}; ID {}; Port {}".format(devices_mapping.map_table[topic][0],
+                                                        devices_mapping.map_table[topic][1],
+                                                        devices_mapping.map_table[topic][2]))
+                do_controllers_array[devices_mapping.map_table[topic][1]].channel_off(devices_mapping.map_table[topic][2])
+
+
 def on_message(client, userdata, message):
-    print("message received ", str(message.payload.decode("utf-8")))
-    print("message topic=", message.topic)
-    print("message qos=", message.qos)
-    print("message retain flag=", message.retain)
-
-    if message.topic in devices_mapping.map_table:
-        if str(message.payload.decode("utf-8")) == "ON":
-            print("Exec: {}; ID {}; Port {}".format(devices_mapping.map_table[message.topic][0],
-                                                devices_mapping.map_table[message.topic][1],
-                                                devices_mapping.map_table[message.topic][2]))
-            do_controllers_array[devices_mapping.map_table[message.topic][1]].channel_on(devices_mapping.map_table[message.topic][2])
-
-        else:
-            print("Exec: {}; ID {}; Port {}".format(devices_mapping.map_table[message.topic][0],
-                                                    devices_mapping.map_table[message.topic][1],
-                                                    devices_mapping.map_table[message.topic][2]))
-            do_controllers_array[devices_mapping.map_table[message.topic][1]].channel_off(devices_mapping.map_table[message.topic][2])
+    print("message payload= {} topic= {} qos= {} flag= {}".format(str(message.payload.decode("utf-8")), message.topic,
+                                                                  message.qos, message.retain))
+    item = message.topic, str(message.payload.decode("utf-8"))
+    command_queue.put(item)
 
 
 def connect_to_broker():
@@ -41,7 +53,7 @@ def connect_to_broker():
     for topic_name in devices_mapping.map_table:
         client.subscribe(topic_name)
 
-    # client.loop_forever(retry_first_connection=True)
+    return client
 
 
 def main():
@@ -50,8 +62,8 @@ def main():
     time.sleep(1)
     do_controllers_array[0x4] = do_ctrl(slave_id=0x4)
     time.sleep(1)
-    connect_to_broker()
-    ping_controller_timeout = 0
+    mqtt_client = connect_to_broker()
+    threading.Thread(target=worker, daemon=True).start()
 
     while is_inprogress:
         time.sleep(1)
@@ -60,6 +72,8 @@ def main():
         #     ping_controller_timeout = 0
         #     print("Ping ethToRS server ")
         #     do_controllers_array[0x3].get_channel_status(0x1)
+    # mqtt_client.loop_forever(retry_first_connection=True)
+    command_queue.join()
 
 
 if __name__ == "__main__":

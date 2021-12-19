@@ -29,6 +29,7 @@ class DOController:
         :return: Parsed response from server.
         """
         try:
+            
             self.sock.sendall(adu)
 
             # Check exception ADU (which is shorter than all other responses) first.
@@ -47,37 +48,39 @@ class DOController:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.sock.connect(('192.168.0.101', 20108))
             print("New socket have been created")
+            return "Error: Connection Reset by peer"
         except Exception as error:
-            print("Exception:{}".format(error))
+            print("Exception :socket{}".format(error))
             return "Error: {}".format(error)
 
         try:
             ret_val = rtu.parse_response_adu(response_error_adu + response_remainder, adu)
         except Exception as error:
-            print("Exception:{}".format(error))
+            print("ADU {}".format(adu))
+            print("Exception rtu parser:{}".format(error))
             return "Error: {}".format(error)
         return ret_val
 
     def channel_on(self, channel):
-        # print("Turn On channel {}".format(channel))
+        print("Turn On channel {}".format(channel))
         message = rtu.write_single_register(slave_id=self.slave_id, address=channel, value=0x0100)
-        print(message)
         response = self.send_msg(message)
         if response == 256:
             print("Success open rq")
         else:
+            print("raw msg={}".format(message))
             print("response {}".format(response))
             print("Try to send command again")
             response = self.send_msg(message)
 
     def channel_off(self, channel):
-        # print("Turn Off channel {}".format(channel))
+        print("Turn Off channel {}".format(channel))
         message = rtu.write_single_register(slave_id=self.slave_id, address=channel, value=0x0200)
-        print(message)
         response = self.send_msg(message)
         if response == 512:
             print("Success close rq")
         else:
+            print("raw msg={}".format(message))
             print("response {}".format(response))
             print("Try to send command again")
             response = self.send_msg(message)
@@ -204,6 +207,11 @@ def main():
             controller_3.channel_on(5)
         if command == 'ltloff':
             controller_3.channel_off(5)
+
+        if command == 'hon':
+            controller_3.channel_on(13)
+        if command == 'hoff':
+            controller_3.channel_off(13)
         if command == 'e':
             break
     #kitchen led stripe

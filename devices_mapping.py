@@ -4,7 +4,7 @@ topic_name, device_name, rs_485_id, port_num
 
 map_table = {
     # bedroom
-    "home/bedroom/recuperator_periodic_mode": ["bed room recuperator periodic mode", 0x1, 0x1],
+    #"home/bedroom/recuperator_periodic_mode": ["bed room recuperator periodic mode", 0x1, 0x1],
     "home/bedroom/recuperator_low_speed": ["bed room recuperator low speed", 0x4, 0x2],
     "home/bedroom/recuperator_hi_speed": ["bed room recuperator hi speed", 0x4, 0x8],
     "home/bedroom/main_lamp": ["bed room main lamp", 0x4, 0x4],
@@ -31,7 +31,7 @@ map_table = {
     "home/bathroom_2": ["kitchen main lamp", 0x3, 0x3],
 
     # heater valve
-    "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0x12],
-    "home/livingroom/heater_valve": ["living room heater valve", 0x3, 0x13],
-    "home/bedroom/heater_valve": ["bed room heater valve", 0x3, 0x14],
+    "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0xC],
+    "home/livingroom/heater_valve": ["living room heater valve", 0x3, 0xD],
+    "home/bedroom/heater_valve": ["bed room heater valve", 0x3, 0xE],
 }
