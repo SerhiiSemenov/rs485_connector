@@ -4,7 +4,7 @@ import errno
 from umodbus import conf
 from umodbus.client.serial import rtu
 from umodbus.utils import recv_exactly
-
+import sys
 
 class DOController:
     """Wrap basic Modbus operation with
@@ -86,11 +86,9 @@ class DOController:
             response = self.send_msg(message)
 
     def get_channel_status(self, channel):
-        print("Channel status {}".format(channel))
         message = rtu.read_holding_registers(slave_id=self.slave_id, starting_address=channel, quantity=0x0001)
         print(message)
         response = self.send_msg(message)
-        print("response {}".format(response))
         return response
 
     def get_slave_id(self):
@@ -110,6 +108,7 @@ class DOController:
 
 
 def main():
+
     controller_1 = DOController(slave_id=0x6)
     time.sleep(1)
     controller_3 = DOController(slave_id=0x3)

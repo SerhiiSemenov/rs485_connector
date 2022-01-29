@@ -5,6 +5,8 @@ import devices_mapping
 from do_controller import DOController as do_ctrl
 import queue
 import threading
+import sys
+import syslog
 
 command_queue = queue.Queue()
 
@@ -25,12 +27,20 @@ def worker():
                                                         devices_mapping.map_table[topic][1],
                                                         devices_mapping.map_table[topic][2]))
                 do_controllers_array[devices_mapping.map_table[topic][1]].channel_on(devices_mapping.map_table[topic][2])
+                if (do_controllers_array[devices_mapping.map_table[topic][1]].get_channel_status(devices_mapping.map_table[topic][2]))[0] != 1:
+                    syslog.syslog(syslog.LOG_ERR, "stop thread")
+                    sys.exit()
+
 
             else:
                 print("Exec: {}; ID {}; Port {}".format(devices_mapping.map_table[topic][0],
                                                         devices_mapping.map_table[topic][1],
                                                         devices_mapping.map_table[topic][2]))
                 do_controllers_array[devices_mapping.map_table[topic][1]].channel_off(devices_mapping.map_table[topic][2])
+                if (do_controllers_array[devices_mapping.map_table[topic][1]].get_channel_status(devices_mapping.map_table[topic][2]))[0] != 0:
+                    syslog.syslog(syslog.LOG_ERR, "stop thread")
+                    sys.exit()
+
 
 
 def on_message(client, userdata, message):
@@ -63,10 +73,14 @@ def main():
     do_controllers_array[0x4] = do_ctrl(slave_id=0x4)
     time.sleep(1)
     mqtt_client = connect_to_broker()
-    threading.Thread(target=worker, daemon=True).start()
+    worker_thread = threading.Thread(target=worker, daemon=True)
+    worker_thread.start()
 
     while is_inprogress:
         time.sleep(1)
+        if not worker_thread.is_alive():
+            syslog.syslog(syslog.LOG_ERR, "rs485_connector rebooted")
+            sys.exit(1)
         # ping_controller_timeout = ping_controller_timeout+1
         # if ping_controller_timeout > 10000:
         #     ping_controller_timeout = 0
