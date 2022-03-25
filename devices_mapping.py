@@ -3,13 +3,19 @@ topic_name, device_name, rs_485_id, port_num
 """
 
 map_table = {
-    # bedroom
-    #"home/bedroom/recuperator_periodic_mode": ["bed room recuperator periodic mode", 0x1, 0x1],
+    # master bedroom
     "home/bedroom/recuperator_low_speed": ["bed room recuperator low speed", 0x4, 0x2],
-    "home/bedroom/recuperator_hi_speed": ["bed room recuperator hi speed", 0x4, 0x8],
+    "home/bedroom/recuperator_shutter_power": ["bed room recuperator hi speed", 0x4, 0x8],
     "home/bedroom/main_lamp": ["bed room main lamp", 0x4, 0x4],
     "home/bedroom/bed_lamp": ["bed room bed light", 0x3, 0x9],
     "home/bedroom/floor_lamp": ["bed room bed light", 0x3, 0x10],
+
+    #kid area
+    # "home/bedroom/recuperator_low_speed": ["bed room recuperator low speed", 0x4, 0x2],
+    # "home/bedroom/recuperator_shutter_power": ["bed room recuperator hi speed", 0x4, 0x8],
+    "home/kidroom/main_lamp": ["bed room main lamp", 0x5, 0xB],
+    "home/kidroom/bed_lamp": ["bed room bed light", 0x5, 0xD],
+    "home/kidroom/floor_lamp": ["bed room bed light", 0x6, 0x5],
 
     # kitchen
     "home/kitchen/background_lamp": ["kitchen furniture background lamp", 0x4, 0x6],
@@ -19,6 +25,7 @@ map_table = {
     # corridor
     "home/corridor/lamp": ["corridor lamp", 0x4, 0x7],
     "home/corridor/server_fan": ["corridor fan", 0x4, 0x10],
+    "home/corridor/flor_lamp": ["corridor fan", 0x6, 0x2],
 
     # living room
     "home/livingroom/recuperator_hi_speed": ["living room recuperator hi speed", 0x4, 0x1],
@@ -27,11 +34,14 @@ map_table = {
     "home/livingroom/bacground_serhiis_table_lamp": ["living room serhii's table lamp", 0x3, 0x5],
 
     # bathroom
-    "home/bathroom_1": ["kitchen main lamp", 0x3, 0x3],
-    "home/bathroom_2": ["kitchen main lamp", 0x3, 0x3],
+    "home/bathroom_1/lamp": ["bathroom_1 main lamp", 0x6, 0x3],
+    "home/bathroom_1/vent": ["bathroom_1 main vent", 0x6, 0x1],
+    "home/bathroom_2/vent": ["bathroom_2 main vent", 0x6, 0x5],
+    "home/bathroom_2/lamp": ["kitchen main lamp", 0x5, 0x8],
 
     # heater valve
     "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0xC],
     "home/livingroom/heater_valve": ["living room heater valve", 0x3, 0xD],
     "home/bedroom/heater_valve": ["bed room heater valve", 0x3, 0xE],
+    "home/kidarea/heater_valve": ["bed room heater valve", 0x6, 0x6],
 }

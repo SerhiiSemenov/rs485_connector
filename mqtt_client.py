@@ -27,9 +27,9 @@ def worker():
                                                         devices_mapping.map_table[topic][1],
                                                         devices_mapping.map_table[topic][2]))
                 do_controllers_array[devices_mapping.map_table[topic][1]].channel_on(devices_mapping.map_table[topic][2])
-                if (do_controllers_array[devices_mapping.map_table[topic][1]].get_channel_status(devices_mapping.map_table[topic][2]))[0] != 1:
-                    syslog.syslog(syslog.LOG_ERR, "stop thread")
-                    sys.exit()
+                # if (do_controllers_array[devices_mapping.map_table[topic][1]].get_channel_status(devices_mapping.map_table[topic][2]))[0] != 1:
+                #     syslog.syslog(syslog.LOG_ERR, "stop thread")
+                #     sys.exit()
 
 
             else:
@@ -37,9 +37,9 @@ def worker():
                                                         devices_mapping.map_table[topic][1],
                                                         devices_mapping.map_table[topic][2]))
                 do_controllers_array[devices_mapping.map_table[topic][1]].channel_off(devices_mapping.map_table[topic][2])
-                if (do_controllers_array[devices_mapping.map_table[topic][1]].get_channel_status(devices_mapping.map_table[topic][2]))[0] != 0:
-                    syslog.syslog(syslog.LOG_ERR, "stop thread")
-                    sys.exit()
+                # if (do_controllers_array[devices_mapping.map_table[topic][1]].get_channel_status(devices_mapping.map_table[topic][2]))[0] != 0:
+                #     syslog.syslog(syslog.LOG_ERR, "stop thread")
+                #     sys.exit()
 
 
 
@@ -72,6 +72,9 @@ def main():
     time.sleep(1)
     do_controllers_array[0x4] = do_ctrl(slave_id=0x4)
     time.sleep(1)
+    do_controllers_array[0x5] = do_ctrl(slave_id=0x5)
+    time.sleep(1)
+    do_controllers_array[0x6] = do_ctrl(slave_id=0x6)
     mqtt_client = connect_to_broker()
     worker_thread = threading.Thread(target=worker, daemon=True)
     worker_thread.start()
