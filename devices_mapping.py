@@ -34,10 +34,12 @@ map_table = {
     "home/livingroom/bacground_serhiis_table_lamp": ["living room serhii's table lamp", 0x3, 0x5],
 
     # bathroom
-    "home/bathroom_1/lamp": ["bathroom_1 main lamp", 0x6, 0x3],
+    "home/bathroom_1/lamp": ["bathroom_1 lamp", 0x6, 0x3],
     "home/bathroom_1/vent": ["bathroom_1 main vent", 0x6, 0x1],
     "home/bathroom_2/vent": ["bathroom_2 main vent", 0x6, 0x5],
-    "home/bathroom_2/lamp": ["kitchen main lamp", 0x5, 0x8],
+    "home/bathroom_2/lamp": ["bathroom 2 lamp", 0x5, 0x8],
+    "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8],
+    "home/bathroom_1/lamp_auto": ["bathroom 1 motion detected lamp", 0x6, 0x3],
 
     # heater valve
     "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0xC],
