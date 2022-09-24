@@ -11,8 +11,8 @@ map_table = {
     "home/bedroom/floor_lamp": ["bed room bed light", 0x3, 0x10],
 
     #kid area
-    # "home/bedroom/recuperator_low_speed": ["bed room recuperator low speed", 0x4, 0x2],
-    # "home/bedroom/recuperator_shutter_power": ["bed room recuperator hi speed", 0x4, 0x8],
+    "home/bedroom/recuperator_low_speed": ["bed room recuperator low speed", 0x5, 0x1],
+    "home/bedroom/recuperator_shutter_power": ["bed room recuperator hi speed", 0x5, 0x3],
     "home/kidroom/main_lamp": ["bed room main lamp", 0x5, 0xB],
     "home/kidroom/bed_lamp": ["bed room bed light", 0x5, 0xD],
     "home/kidroom/floor_lamp": ["bed room bed light", 0x6, 0x5],
