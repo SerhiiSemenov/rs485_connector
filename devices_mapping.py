@@ -32,10 +32,13 @@ map_table = {
     "home/livingroom/recuperator_low_speed": ["living room recuperator low speed", 0x4, 0xD],
     "home/livingroom/bacground_main_lamp": ["living room bacground LED lamp", 0x3, 0x6],
     "home/livingroom/bacground_serhiis_table_lamp": ["living room serhii's table lamp", 0x3, 0x5],
+    "home/livingroom/work_place_1_lamp": ["living room bacground LED lamp", 0x3, 0x7],
+    "home/livingroom/launge_zone_lamp": ["launge zone lamp", 0x3, 0x4],
 
     # bathroom
     "home/bathroom_1/lamp": ["bathroom_1 lamp", 0x6, 0x3],
     "home/bathroom_1/vent": ["bathroom_1 main vent", 0x6, 0x1],
+    "home/bathroom_1/heater": ["bathroom 1 water heater", 0x5, 0x6],
     "home/bathroom_2/vent": ["bathroom_2 main vent", 0x6, 0x5],
     "home/bathroom_2/lamp": ["bathroom 2 lamp", 0x5, 0x8],
     "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8],
