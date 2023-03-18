@@ -25,7 +25,7 @@ map_table = {
     # corridor
     "home/corridor/lamp": ["corridor lamp", 0x4, 0x7],
     "home/corridor/server_fan": ["corridor fan", 0x4, 0x10],
-    "home/corridor/flor_lamp": ["corridor fan", 0x6, 0x2],
+    "home/corridor/floor_lamp": ["corridor fan", 0x6, 0x2],
 
     # living room
     "home/livingroom/recuperator_hi_speed": ["living room recuperator hi speed", 0x4, 0x1],
@@ -41,12 +41,18 @@ map_table = {
     "home/bathroom_1/heater": ["bathroom 1 water heater", 0x5, 0x6],
     "home/bathroom_2/vent": ["bathroom_2 main vent", 0x6, 0x5],
     "home/bathroom_2/lamp": ["bathroom 2 lamp", 0x5, 0x8],
-    "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8],
-    "home/bathroom_1/lamp_auto": ["bathroom 1 motion detected lamp", 0x6, 0x3],
 
     # heater valve
     "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0xC],
     "home/livingroom/heater_valve": ["living room heater valve", 0x3, 0xD],
     "home/bedroom/heater_valve": ["bed room heater valve", 0x3, 0xE],
     "home/kidarea/heater_valve": ["bed room heater valve", 0x6, 0x6],
+
+    # motion detection inst
+    "home/bedroom/main_lamp_auto": ["bed room main lamp", 0x4, 0x4],
+    "home/kidroom/main_lamp_auto": ["bed room main lamp", 0x5, 0xB],
+    "home/kitchen/main_lamp_auto": ["kitchen main lamp", 0x4, 0x3],
+    "home/livingroom/bacground_main_lamp_auto": ["living room bacground LED lamp", 0x3, 0x6],
+    "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8],
+    "home/bathroom_1/lamp_auto": ["bathroom 1 motion detected lamp", 0x6, 0x3],
 }
