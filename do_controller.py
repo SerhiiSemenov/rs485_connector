@@ -111,14 +111,14 @@ def main():
 
     # controller_1 = DOController(slave_id=0x1)
     # time.sleep(1)
-    # controller_3 = DOController(slave_id=0x3)
+    controller_3 = DOController(slave_id=0x3)
     # time.sleep(1)
     # controller_4 = DOController(slave_id=0x4)
+    time.sleep(1)
+    # controller_5 = DOController(slave_id=0x5)
     # time.sleep(1)
-    controller_5 = DOController(slave_id=0x5)
-    time.sleep(1)
-    controller_6 = DOController(slave_id=0x6)
-    time.sleep(1)
+    # controller_6 = DOController(slave_id=0x6)
+    # time.sleep(1)
 
 # Can be used just with one connected unit
 #     print("Get ID")
@@ -129,12 +129,12 @@ def main():
 #     controller_1.get_slave_id()
 #     return 1
 
-    for i in range(16):
+    for i in range(9, 16):
         print("Out put id: {:02X}".format(i))
-        # controller_5.channel_on(i)
+        controller_3.channel_on(i)
         command = input("Press something for the continue\n")
         if command == 'n':
-            controller_5.channel_off(i)
+            controller_3.channel_off(i)
         elif command == 'e':
             return 0
 

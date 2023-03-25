@@ -13,6 +13,7 @@ map_table = {
     #kid area
     "home/kidroom/recuperator_low_speed": ["kidroom recuperator low speed", 0x5, 0x3],
     "home/kidroom/recuperator_hi_speed": ["kidroom room recuperator hi speed", 0x5, 0x1],
+    "home/kidroom/motorised_blinds": ["kidroom motorised_blinds", 0x5, 0x5],
     "home/kidroom/main_lamp": ["bed room main lamp", 0x5, 0xB],
     "home/kidroom/bed_lamp": ["bed room bed light", 0x5, 0xD],
     "home/kidroom/floor_lamp": ["bed room bed light", 0x6, 0x4],
@@ -36,11 +37,11 @@ map_table = {
     "home/livingroom/launge_zone_lamp": ["launge zone lamp", 0x3, 0x4],
 
     # bathroom
-    "home/bathroom_1/lamp": ["bathroom_1 lamp", 0x6, 0x3],
+    "home/bathroom_1/lamp": ["bathroom_1 lamp", 0x6, 0x3, "home/bathroom_1/lamp/status"],
     "home/bathroom_1/vent": ["bathroom_1 main vent", 0x6, 0x1],
     "home/bathroom_1/heater": ["bathroom 1 water heater", 0x5, 0x6],
     "home/bathroom_2/vent": ["bathroom_2 main vent", 0x6, 0x5],
-    "home/bathroom_2/lamp": ["bathroom 2 lamp", 0x5, 0x8],
+    "home/bathroom_2/lamp": ["bathroom 2 lamp", 0x5, 0x8, "home/bathroom_2/lamp/status"],
 
     # heater valve
     "home/kitchen/heater_valve": ["kitchen heater valve", 0x3, 0xC],
@@ -55,4 +56,8 @@ map_table = {
     "home/livingroom/bacground_main_lamp_auto": ["living room bacground LED lamp", 0x3, 0x6],
     "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8],
     "home/bathroom_1/lamp_auto": ["bathroom 1 motion detected lamp", 0x6, 0x3],
+
+    # system
+    "home/sauna/valve_open": ["bed room heater valve", 0x5, 0x2],
+    "home/sauna/valve_close": ["bed room heater valve", 0x5, 0x4],
 }
