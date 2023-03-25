@@ -8,14 +8,14 @@ map_table = {
     "home/bedroom/recuperator_shutter_power": ["bed room recuperator hi speed", 0x4, 0x8],
     "home/bedroom/main_lamp": ["bed room main lamp", 0x4, 0x4],
     "home/bedroom/bed_lamp": ["bed room bed light", 0x3, 0x9],
-    "home/bedroom/floor_lamp": ["bed room bed light", 0x3, 0x10],
+    "home/bedroom/floor_lamp": ["bed room bed light", 0x3, 0xA],
 
     #kid area
     "home/kidroom/recuperator_low_speed": ["kidroom recuperator low speed", 0x5, 0x3],
     "home/kidroom/recuperator_hi_speed": ["kidroom room recuperator hi speed", 0x5, 0x1],
     "home/kidroom/main_lamp": ["bed room main lamp", 0x5, 0xB],
     "home/kidroom/bed_lamp": ["bed room bed light", 0x5, 0xD],
-    "home/kidroom/floor_lamp": ["bed room bed light", 0x6, 0x5],
+    "home/kidroom/floor_lamp": ["bed room bed light", 0x6, 0x4],
 
     # kitchen
     "home/kitchen/background_lamp": ["kitchen furniture background lamp", 0x4, 0x6],
@@ -24,8 +24,8 @@ map_table = {
 
     # corridor
     "home/corridor/lamp": ["corridor lamp", 0x4, 0x7],
-    "home/corridor/server_fan": ["corridor fan", 0x4, 0x10],
-    "home/corridor/floor_lamp": ["corridor fan", 0x6, 0x2],
+    "home/corridor/server_fan": ["corridor fan", 0x3, 0x10],
+    "home/corridor/floor_lamp": ["corridor floor lamp", 0x6, 0x7],
 
     # living room
     "home/livingroom/recuperator_hi_speed": ["living room recuperator hi speed", 0x4, 0x1],
