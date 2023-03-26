@@ -54,8 +54,8 @@ map_table = {
     "home/kidroom/main_lamp_auto": ["bed room main lamp", 0x5, 0xB],
     "home/kitchen/main_lamp_auto": ["kitchen main lamp", 0x4, 0x3],
     "home/livingroom/bacground_main_lamp_auto": ["living room bacground LED lamp", 0x3, 0x6],
-    "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8],
-    "home/bathroom_1/lamp_auto": ["bathroom 1 motion detected lamp", 0x6, 0x3],
+    "home/bathroom_2/lamp_auto": ["bathroom 2 motion detected lamp", 0x5, 0x8, "home/bathroom_2/lamp/status"],
+    "home/bathroom_1/lamp_auto": ["bathroom 1 motion detected lamp", 0x6, 0x3, "home/bathroom_1/lamp/status"],
 
     # system
     "home/sauna/valve_open": ["bed room heater valve", 0x5, 0x2],

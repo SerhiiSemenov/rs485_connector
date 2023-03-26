@@ -28,7 +28,7 @@ def worker(client):
                                                         devices_mapping.map_table[topic][2]))
                 do_controllers_array[devices_mapping.map_table[topic][1]].channel_on(devices_mapping.map_table[topic][2])
                 if len(devices_mapping.map_table[topic]) == 4:
-                    client.publish(devices_mapping.map_table[topic][3], 'ON')
+                    client.publish(devices_mapping.map_table[topic][3], 'ON', retain=True)
                     client.loop()
 
 
@@ -38,7 +38,7 @@ def worker(client):
                                                         devices_mapping.map_table[topic][2]))
                 do_controllers_array[devices_mapping.map_table[topic][1]].channel_off(devices_mapping.map_table[topic][2])
                 if len(devices_mapping.map_table[topic]) == 4:
-                    client.publish(devices_mapping.map_table[topic][3], 'OFF')
+                    client.publish(devices_mapping.map_table[topic][3], 'OFF', retain=True)
                     client.loop()
 
 
