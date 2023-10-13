@@ -15,6 +15,7 @@ is_inprogress = True
 
 
 def worker(client):
+    client.loop_start()
     while True:
         item = command_queue.get()
         topic = item[0]
@@ -50,14 +51,14 @@ def on_message(client, userdata, message):
 
 
 def connect_to_broker():
-    #broker_address="127.0.0.1"
-    broker_address = "192.168.0.113"
+    broker_address="127.0.0.1"
+    #broker_address = "192.168.0.113"
     print("creating new instance")
     client = mqtt.Client("RS485_client")    # create new instance
     client.on_message = on_message          # attach function to callback
     print("connecting to broker")
     client.connect(broker_address)          # connect to broker
-    client.loop_start()                     # start the loop
+    #client.loop_start()                     # start the loop
     print("Subscribing to topics")
     for topic_name in devices_mapping.map_table:
         client.subscribe(topic_name)
