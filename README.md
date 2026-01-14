@@ -1,2 +1,2 @@
-# rs285_connector
+# rs485_connector
 Connect RS485 devices to the hassio 
